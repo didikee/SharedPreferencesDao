@@ -5,4 +5,5 @@ package com.didikee.spdaolib.bizs;
  * extend this to defined your spkeys
  */
 public abstract class SPKey {
+
 }

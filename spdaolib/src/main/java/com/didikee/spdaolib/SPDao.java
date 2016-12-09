@@ -70,5 +70,4 @@ public final class SPDao implements ISPDao {
         editor.apply();
     }
 
-
 }
