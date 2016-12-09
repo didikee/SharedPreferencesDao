@@ -6,5 +6,5 @@ package com.didikee.spdaolib.interf;
 
 public interface ISPDao {
     char getValue(int key);
-    boolean putValue(int key,char value);
+    void putValue(int key,char value);
 }

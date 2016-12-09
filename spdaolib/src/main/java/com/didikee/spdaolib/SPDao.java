@@ -2,6 +2,7 @@ package com.didikee.spdaolib;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.didikee.spdaolib.bizs.SPValue;
 import com.didikee.spdaolib.interf.ISPDao;
@@ -20,58 +21,54 @@ public final class SPDao implements ISPDao {
         this.context = context;
     }
 
-    private void init() {
-
-    }
-
     @Override
     public char getValue(int key) {
         SharedPreferences sp = context.getSharedPreferences(SPDAO,
                 Context.MODE_PRIVATE);
         String allValues = sp.getString(SPKEY, "");
-        int length = allValues.length();
+        Log.e("test","get: "+allValues);
         String defaultStr = String.valueOf(SPValue.DEFAULT);
-        if (length==0){
+        int maxIndex = allValues.length() - 1;
+        if (key > maxIndex) {
             SharedPreferences.Editor editor = sp.edit();
-            String tempAdd="";
-            for (int i = 0; i < key; i++) {
-                tempAdd+=defaultStr;
+            String tempAdd = "";
+            for (int i = maxIndex + 1; i <= key; i++) {
+                tempAdd += defaultStr;
             }
-            editor.putString(SPKEY, tempAdd);
+            editor.putString(SPKEY, allValues + tempAdd);
             editor.apply();
             return SPValue.DEFAULT;
-        }else {
-            if (key > length -1){
-                SharedPreferences.Editor editor = sp.edit();
-                int i = key - length - 1;
-                String tempAdd="";
-                for (int i1 = 0; i1 < i; i1++) {
-                    tempAdd+=defaultStr;
-                }
-                editor.putString(SPKEY, allValues + tempAdd);
-                editor.apply();
-                return SPValue.DEFAULT;
-            }else {
-                return allValues.charAt(key);
-            }
+        } else {
+            return allValues.charAt(key);
         }
     }
 
     @Override
-    public boolean putValue(int key, char value) {
+    public void putValue(int key, char value) {
         SharedPreferences sp = context.getSharedPreferences(SPDAO,
                 Context.MODE_PRIVATE);
-
         String allValues = sp.getString(SPKEY, "");
-        int length = allValues.length();
-        if ((key == 0 && length != 0) || (key <= length - 1)) {
-            return false;
+        Log.e("test","put start: "+allValues);
+        String defaultStr = String.valueOf(SPValue.DEFAULT);
+        SharedPreferences.Editor editor = sp.edit();
+        int maxIndex = allValues.length() - 1;
+        if (key > maxIndex) {
+            String tempAdd = "";
+            for (int i = maxIndex + 1; i <= key; i++) {
+                tempAdd += defaultStr;
+            }
+            Log.e("test","put end1: "+allValues+ tempAdd);
+            editor.putString(SPKEY, allValues+tempAdd);
         } else {
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putString(SPKEY, allValues + String.valueOf(value));
-            editor.apply();
-            return true;
+            char oldChar = allValues.charAt(key);
+            Log.e("test","oldCar: "+oldChar);
+            StringBuilder sb=new StringBuilder(allValues);
+            sb.setCharAt(key,value);
+            Log.e("test","put end2: "+ sb.toString());
+            editor.putString(SPKEY, sb.toString());
         }
+        editor.apply();
     }
+
 
 }

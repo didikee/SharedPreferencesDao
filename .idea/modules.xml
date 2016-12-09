@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SharedPreferencesDao.iml" filepath="$PROJECT_DIR$/SharedPreferencesDao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SharedPreferencesDao.iml" filepath="$PROJECT_DIR$/SharedPreferencesDao.iml" />
       <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spdaolib/spdaolib.iml" filepath="$PROJECT_DIR$/spdaolib/spdaolib.iml" />
       <module fileurl="file://$PROJECT_DIR$/spdaolib/spdaolib.iml" filepath="$PROJECT_DIR$/spdaolib/spdaolib.iml" />
     </modules>
   </component>
